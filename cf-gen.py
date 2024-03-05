@@ -6,15 +6,29 @@ from typing import List, Any
 
 
 from lib.music import compute_interval
-from lib.checks import consonant_outlines
+from lib.checks import ( consonant_outlines, recover_leaps, no_trills )
 
 class CantusGenerator() :
     def __init__(self, size : int) -> None:
         if size > 16 or size < 4 :
             raise ValueError('--size must be 4-16 inclusive')
         
-        self.size = size
-        self.notes : List[int] = [0]*size
+        self.size : int = size
+        self.notes : List[int] = []
+        self.high_spot : int = 0
+        self.span :int = 0
+
+        self.set_notes_empty()
+
+    def set_notes_empty(self) -> None :
+        self.notes = [0]*self.size
+        self.notes[0] = 1
+        self.notes[-1] = 1
+        self.notes[-2] = 2
+
+    def replace_climax(self) -> None :
+        self.notes[self.high_spot] = self.span
+
 
     def place_high_note(self) -> None :
         # first place the highest note can be
@@ -59,12 +73,15 @@ class CantusGenerator() :
 
     
     def post_checks(self) -> bool :
-
-        return consonant_outlines(self.notes)
+        return (
+            consonant_outlines(self.notes) 
+            and recover_leaps(self.notes)
+            and no_trills(self.notes) )
 
     def generate(self) -> List[int] :
          
         tries : int = 100
+        span_tries : int = 10
         found : bool = False
         while tries > 0 and not found :
             self.generate_v1()
@@ -72,8 +89,13 @@ class CantusGenerator() :
             if self.post_checks() :
                 found = True
             else :
-                self.notes = [0]*self.size
+                self.set_notes_empty()
                 tries -= 1
+                span_tries -= 1
+                if span_tries <= 0 :
+                    self.span = 0
+                    self.high_spot = 0
+
 
         if found :
             return self.notes
@@ -83,11 +105,10 @@ class CantusGenerator() :
 
 
     def generate_v1(self) -> None :
-        self.notes[0] = 1
-        self.notes[-1] = 1
-        self.notes[-2] = 2
-
-        self.place_high_note()
+        if self.span == 0 :
+            self.place_high_note()
+        else :
+            self.replace_climax()
 
         for n in range(1, self.size-2) :
             if self.notes[n] == 0:

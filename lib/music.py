@@ -16,6 +16,19 @@ class interval(NamedTuple) :
     
     def is_same(self) -> bool :
         return self.dir.lower() == SAME
+    
+    def is_step(self) -> bool :
+        return self.size == 2
+    
+    def is_skip(self) -> bool :
+        return self.size == 3
+    
+    def is_leap(self) -> bool :
+        return self.size >= 4
+    
+    def is_big_leap(self) -> bool :
+        return self.size >= 5
+
 
 def compute_interval(first_note : int, second_note : int) -> interval :
     if second_note > first_note :
