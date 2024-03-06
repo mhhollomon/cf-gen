@@ -10,9 +10,11 @@
   <body>
     <h1>Randomly Generated Cantus Firmus</h1>
     <p>For all your counterpoint needs.</p>
+
+    <input type="number" name="size" min="5" max="16" value="10" id="size_input">
     
     <button py-click="generate_cantus">Generate</button>
-    <div id="output"></div>
+    <h3 id="output"></h3>
     <script type="py" src="./main.py" config="./pyscript.json" terminal></script>
   </body>
   </html>

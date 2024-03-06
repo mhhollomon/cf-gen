@@ -5,7 +5,11 @@ from lib.cantus import CantusGenerator
 
 
 def generate_cantus(event) :
-    obj = CantusGenerator(10)
+
+    size_input = document.querySelector("#size_input")
+    obj = CantusGenerator(int(size_input.value))
+
+    print(f"size = {obj.size}")
 
     cantus = obj.generate()
 
