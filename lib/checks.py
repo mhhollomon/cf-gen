@@ -86,33 +86,33 @@ def no_trills(cantus : List[int]) -> bool :
 
     for n in range(1, size-1) :
         this_note = cantus[n]
-        #print(f"this_note = {this_note}, trill = {trill}")
+        print(f"this_note = {this_note}, trill = {trill}")
         intvl = _m.compute_interval(cantus[n-1], this_note)
 
         if intvl.is_step() :
             if trill.size % 2 == 1 :
-                #print("size is odd")
+                print("size is odd")
                 if trill.second == 0 :
                     trill.second = this_note
                     trill.size += 1
                 elif this_note == trill.second :
                     trill.size += 1
                 else :
-                    #print("this_note is not the same as the second note. restarting")
+                    print("this_note is not the same as the second note. restarting")
                     trill.restart(trill.start+1, trill.second)
                     trill.second = this_note
                     trill.size += 1
             else :
-                #print("size is even")
+                print("size is even")
                 if this_note == trill.first :
                     trill.size += 1
                 else :
-                    #print("this_note is not the same as the first note. restarting")
+                    print("this_note is not the same as the first note. restarting")
                     trill.restart(trill.start+1, trill.second)
                     trill.second = this_note
                     trill.size += 1
         else :
-            #print("not a step")
+            print("not a step")
             trill.restart(n, this_note)
 
         if trill.is_complete() :

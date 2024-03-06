@@ -1,0 +1,8 @@
+{
+    "packages": ["arrr"],
+    "files" : {
+        "lib/cantus.py" : "./lib/cantus.py",
+        "lib/music.py" : "./lib/music.py",
+        "lib/checks.py" : "./lib/checks.py"
+    }
+}
