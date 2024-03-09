@@ -1,4 +1,4 @@
-from pyscript import document, when, window
+from pyscript import document, when
 
 from lib.cantus import CantusGenerator
 from lib.checks import checklist
@@ -31,10 +31,19 @@ def generate_cantus(event) :
     size_input = document.querySelector("#size-input")
     obj = CantusGenerator(int(size_input.value))
 
+    method_rb = document.getElementById("method-good")
+
+    method_once : bool = not method_rb.checked
+
+    print(f"method_once = {method_once}")
+
     print(f"size = {obj.size}")
 
-    obj.generate_v1()
-    cantus = obj.notes
+    if method_once :
+        obj.generate_v1()
+        cantus = obj.notes
+    else :
+        cantus = obj.generate()
 
     output_div = document.querySelector("#output")
     output_div.innerText = str(cantus)

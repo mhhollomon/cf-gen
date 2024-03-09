@@ -29,21 +29,20 @@
         <label class="col-1" for="size-input">Cantus Size</label>
         <input class="col-1" type="number" name="size" min="8" max="16" value="10" id="size-input">
         <label class="col-1" for="span-input">Highest Note</label>
-        <input class="col-1" name="span" list="span-choice" id="span-input" value="Random">
-        <datalist id="span-choice">
-          <option value="Random">
-          <option value="5">
-          <option value="6">
-          <option value="8">
-          <option value="10">
-        </datalist>
+        <select class="col-1" id="span-input" name="select-input">
+          <option value="Random">Random</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="8">8</option>
+          <option value="10">10</option>
+        </select>
 
       </div>
       <div class="row">
         <form class="col-3">
-          <input type="radio" id="once" name="method" value="once">
+          <input type="radio" id="method-once" name="method" value="once" checked>
           <label for="once">Try Once</label><br>
-          <input type="radio" id="good" name="method" value="good">
+          <input type="radio" id="method-good" name="method" value="good">
           <label for="good">Until all checks pass</label><br>
         </form>
 
