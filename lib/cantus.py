@@ -3,7 +3,7 @@ from typing import List, Any
 
 
 from lib.music import compute_interval
-from lib.checks import ( consonant_outlines, recover_leaps, no_trills )
+from lib.checks import checklist
 
 class CantusGenerator() :
     def __init__(self, size : int) -> None:
@@ -59,10 +59,10 @@ class CantusGenerator() :
 
     def note_okay(self, note : int, prev : int, next : int) -> int :
         retval = True
-        if compute_interval(prev, note).size not in [2,3,5,6] :
+        if compute_interval(prev, note).size not in [2,3,4,5,6] :
             retval = False
         if next > 0 :
-            if compute_interval(note, next).size not in [2,3,5,6] :
+            if compute_interval(note, next).size not in [2,3,4,5,6] :
                 retval = False
 
         return retval
@@ -70,11 +70,15 @@ class CantusGenerator() :
 
     
     def post_checks(self) -> bool :
-        return (
-            consonant_outlines(self.notes) 
-            and recover_leaps(self.notes)
-            and no_trills(self.notes) )
 
+        # do this to specifically ignore short circuiting
+        retval : bool = True
+
+        for check in checklist() :
+            retval &= check().check(self.notes)
+
+        return retval
+    
     def generate(self) -> List[int] :
          
         tries : int = 100
@@ -92,6 +96,7 @@ class CantusGenerator() :
                 if span_tries <= 0 :
                     self.span = 0
                     self.high_spot = 0
+                    span_tries = 10
 
 
         if found :

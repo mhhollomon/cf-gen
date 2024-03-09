@@ -1,20 +1,60 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
       <meta charset="utf-8" />
       <meta name="viewport" content="width=device-width,initial-scale=1" />
-      <link rel="stylesheet" href="https://pyscript.net/releases/2023.11.2/core.css" />
       <title>Cantus Fortuitus</title>
-      <script type="module" src="https://pyscript.net/releases/2023.12.1/core.js"></script>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+      <script type="module" src="https://pyscript.net/releases/2024.2.1/core.js"></script>
+   
   </head>
-  <body>
-    <h1>Randomly Generated Cantus Firmus</h1>
+  <body class="m-3">
+
+    <header class="container-fluid gx-0 bg-primary-subtle">
+      <div class="row align-items-center m-3">
+        <div class="col-12 text-center">
+          <span class="text-black fs-1 p-3 p-md-4">Cantus Fortuitus</span>
+        </div>
+      </div>
+    </header>
+
+    <h3>Randomly Generated Cantus Firmus</h3>
     <p>For all your counterpoint needs.</p>
 
-    <input type="number" name="size" min="5" max="16" value="10" id="size_input">
+    <div class="container-fluid">
+      <div class="row m-3">
+        <button class="col-1" id="generate">Generate</button>
+
+        <label class="col-1" for="size-input">Cantus Size</label>
+        <input class="col-1" type="number" name="size" min="8" max="16" value="10" id="size-input">
+        <label class="col-1" for="span-input">Highest Note</label>
+        <input class="col-1" name="span" list="span-choice" id="span-input" value="Random">
+        <datalist id="span-choice">
+          <option value="Random">
+          <option value="5">
+          <option value="6">
+          <option value="8">
+          <option value="10">
+        </datalist>
+
+      </div>
+      <div class="row">
+        <form class="col-3">
+          <input type="radio" id="once" name="method" value="once">
+          <label for="once">Try Once</label><br>
+          <input type="radio" id="good" name="method" value="good">
+          <label for="good">Until all checks pass</label><br>
+        </form>
+
+      </div>
+    </div>
+
     
-    <button py-click="generate_cantus">Generate</button>
-    <h3 id="output"></h3>
-    <script type="py" src="./main.py" config="./pyscript.json" terminal></script>
+    
+    <div id="output" style="font-size: 8em;">[]</div>
+    <div id="checks" class="my-3 border-top border-bottom"></div>
+    <script type="py" src="./main.py" config="./pyscript.json"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   </body>
   </html>

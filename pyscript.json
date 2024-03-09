@@ -1,5 +1,5 @@
 {
-    "packages": ["arrr"],
+    "packages": ["jinja2"],
     "files" : {
         "lib/cantus.py" : "./lib/cantus.py",
         "lib/music.py" : "./lib/music.py",
