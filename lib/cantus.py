@@ -1,19 +1,27 @@
 import random
-from typing import List, Any
+from typing import List, Union
 
 
 from lib.music import compute_interval
 from lib.checks import checklist
 
 class CantusGenerator() :
-    def __init__(self, size : int) -> None:
-        if size > 16 or size < 4 :
-            raise ValueError('--size must be 4-16 inclusive')
+    def __init__(self, size : int, span : None | int) -> None:
+        if size > 16 or size < 8 :
+            raise ValueError('--size must be 8-16 inclusive')
         
+        if span is not None :
+            if span == 0 :
+                span = None
+            elif span not in [5,6,8,10] :
+                raise ValueError('--highest must be one of 0,5,6,8,10')
+
         self.size : int = size
+        self.user_span : Union[None, int] = span
         self.notes : List[int] = []
         self.high_spot : int = 0
         self.span :int = 0
+
 
         self.set_notes_empty()
 
@@ -33,9 +41,13 @@ class CantusGenerator() :
         # Last place it can be
         suffix = self.size-3
 
+        tries : int = 20
         while True :
             # Pick a highest note
-            self.span = random.choice([5,6,8,10])
+            if self.user_span is None :
+                self.span = random.choice([5,6,8,10])
+            else :
+                self.span = self.user_span
 
             if self.span > 5 :
                 # give ourselves room
@@ -49,6 +61,12 @@ class CantusGenerator() :
             if prefix < suffix :
                 # This will work
                 break
+            elif self.user_span is not None :
+                raise RuntimeError("Cannot find a space for the climax with the supplied highest note and size")
+            else :
+                tries -= 1
+                if tries < 0 :
+                    raise RuntimeError("Cannot find a space for the climax")
         
         self.high_spot = random.randrange(prefix, suffix+1)
 

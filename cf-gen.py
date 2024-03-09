@@ -9,11 +9,13 @@ def main() :
 
     parser = argparse.ArgumentParser()
     parser.add_argument('-s', '--size', type=int, default=10,
-        help="Number of notes in CF (>=4 <=16)")
+        help="Number of notes in CF (>=8 <=16)")
+    parser.add_argument('-c', '--highest', type=int, default=0,
+        help='Highest note to be included as the "climax"')
 
     args : Any = parser.parse_known_args()
 
-    obj = CantusGenerator(args[0].size)
+    obj = CantusGenerator(args[0].size, args[0].highest)
 
     print(f"Cantus = {obj.generate()}")
 

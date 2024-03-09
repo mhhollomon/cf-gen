@@ -29,7 +29,14 @@ indeterminate_check_box
 def generate_cantus(event) :
 
     size_input = document.querySelector("#size-input")
-    obj = CantusGenerator(int(size_input.value))
+    span_input = document.getElementById("span-input")
+
+    span_value : str = span_input.value
+    span : None|int = None
+    if span_value != "Random" :
+        span = int(span_value)
+
+    obj = CantusGenerator(int(size_input.value), span)
 
     method_rb = document.getElementById("method-good")
 
@@ -48,7 +55,7 @@ def generate_cantus(event) :
     output_div = document.querySelector("#output")
     output_div.innerText = str(cantus)
 
-    def reporter(name : str, status : bool, msg : Union[str, None]) -> None :
+    def reporter(name : str, status : bool, msg : str|None) -> None :
         id = id_name(name)
 
         elem = document.getElementById(id)
