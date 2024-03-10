@@ -1,8 +1,16 @@
 {
-    "packages": ["jinja2"],
     "files" : {
         "lib/cantus.py" : "./lib/cantus.py",
         "lib/music.py" : "./lib/music.py",
-        "lib/checks.py" : "./lib/checks.py"
-    }
+        "lib/checks.py" : "./lib/checks.py",
+        "wheels/MIDIUtil-1.2.1-py3-none-any.whl" : "./wheels/MIDIUtil-1.2.1-py3-none-any.whl"
+
+    },
+
+    "packages": [
+        "jinja2", 
+        "dataclasses", 
+        "emfs:./wheels/MIDIUtil-1.2.1-py3-none-any.whl"
+    ]
+
 }
