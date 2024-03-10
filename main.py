@@ -47,7 +47,7 @@ NOTE_TEMPLATE="""
 class GLOBALS :
     cantus : List[int] = field(default_factory=list)
     midi_notes : Tuple = (0, 60, 62, 64, 65, 67, 69, 71, 72, 74, 76)
-    y_offsets : Tuple = (-10, 3, 12, 22, 32, 42, 52, 62, 72, 82)
+    y_offsets : Tuple = (-9, 4, 14, 24, 34, 44, 54, 64, 74, 84)
 
 
 G : GLOBALS = GLOBALS()
@@ -65,7 +65,7 @@ async def download_to_file(buf, filename : str, content_type : str ) :
     blob = Blob.new([content], {type: content_type})
     opts = Object.fromEntries(to_js(
 {
-        "startIn" : "documents",
+        "startIn" : "downloads",
         "suggestedName" : filename,
         "types" : [
             { "accept" : { content_type : [".mid", ".midi"]}}
@@ -111,7 +111,7 @@ def fill_staff(cantus : List[int]) -> None :
         if note > 0 :
             # this line is full of magic derived by trial and error
             y_pos : float = G.y_offsets[note-1]
-            x_pos : float = 5 if not last_note else 0
+            x_pos : float = 6 if not last_note else 0
             note_html = Template(NOTE_TEMPLATE).render(note=note, y_pos=y_pos, x_pos=x_pos, symbol=symbol)
             if note == 1 :
                 klass = "border-top"
