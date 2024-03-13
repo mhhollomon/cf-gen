@@ -1,15 +1,14 @@
 from dataclasses import dataclass, field
 from io import BytesIO
-import pyscript
-from pyscript import when
-from js import Blob, window, document, Object
+from pyscript import when, window
+from js import Blob, document, Object
 
 from lib.cantus import CantusGenerator
 from lib.checks import checklist
 from jinja2 import Template
 from midiutil import MIDIFile
 
-from pyodide.ffi import to_js
+from pyodide.ffi import to_js, create_proxy
 
 import asyncio
 
@@ -52,7 +51,7 @@ class GLOBALS :
 
 G : GLOBALS = GLOBALS()
 
-background_tasks = set()
+background_tasks : set = set()
 
 
 #=================================================
@@ -158,12 +157,6 @@ async def generate_midi() -> None :
         bytefile, "cantus_firmus.mid", "audio/midi")
     
 
-
-    #asyncio.get_running_loop().create_task(
-    #    lambda : download_to_file(
-    #            bytefile.getvalue(), "cantus_firmus.mid", "audio/midi")
-    #)
-
 @when("click", "#generate")
 def generate_cantus(event) :
 
@@ -221,15 +214,12 @@ def generate_cantus(event) :
                 msg_elem.innerText = msg
             
             
-        
-
     for c in checklist() :
         c(reporter).check(G.cantus)
 
     fill_staff(G.cantus)
 
     enable_midi()
-
 
 
 def id_name(input : str) -> str :
@@ -250,10 +240,19 @@ def enable_midi() :
     elem = document.getElementById("midi")
     elem.disabled = len(G.cantus) == 0
 
+def _window_resize(e) -> None :
+    print ("window resize fired")
+    if len(G.cantus) > 0 :
+        fill_staff(G.cantus)
+
 def main() -> None :
     create_checks()
 
     enable_midi()
+
+    window_resize = create_proxy(_window_resize)
+
+    window.addEventListener("resize", window_resize )
 
 ###############
 main()

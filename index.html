@@ -38,13 +38,53 @@
         bottom:80px;       
       }
 
+      #loading-div {
+        position:absolute;
+        top : 0;
+        left : 0;
+        background: transparent;
+        backdrop-filter: blur(10px);
+        width : 100vw;
+        height : 100vh;  
+      }
+
+      #loading { 
+        outline: none; 
+        border: none; 
+        background: transparent;
+        backdrop-filter: blur(10px);
+        width : 30vw;
+        height : 30vh;
+        text-align: center;
+        margin: auto;
+
+      }
+
     </style>
+    <script type="module">
+        const loading = document.getElementById('loading');
+        const load_div = document.getElementById('loading-div');
+        addEventListener('py:ready', () => { 
+          loading.close(); 
+          load_div.hidden=true}
+        );
+        loading.showModal();
+    </script>
+    
   </head>
+
   <body class="m-3">
+    <div id="loading-div">
+      <dialog id="loading">
+        <h1>Loading...</h1>
+      </dialog>
+    </div>
+
 
     <header class="container-fluid gx-0 bg-primary-subtle">
       <div class="row align-items-center m-3">
-        <div class="col-12 text-center">
+        <img src="assets/images/cantus-icon.webp" height="100px" width="100px" class="col-1">
+        <div class="col-10 text-center">
           <span class="text-black fs-1 p-3 p-md-4">Cantus Fortuitus</span>
         </div>
       </div>
@@ -72,10 +112,10 @@
       </div>
       <div class="row">
         <form class="col-3">
-          <input type="radio" id="method-once" name="method" value="once" checked>
+          <input type="radio" id="method-good" name="method" value="good" checked>
+          <label for="good">Until All Checks Pass</label><br>
+          <input type="radio" id="method-once" name="method" value="once">
           <label for="once">Try Once</label><br>
-          <input type="radio" id="method-good" name="method" value="good">
-          <label for="good">Until all checks pass</label><br>
         </form>
 
       </div>
@@ -87,8 +127,7 @@
       </div>
     </div>
 
-    
-    
+
     <div id="output" style="font-size: 2em;">[]</div>
     <div id="music-staff" class="container-fluid">
       <div id="staff-line-5" class="staff-line border-bottom border-dark border-3"></div>
