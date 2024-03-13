@@ -128,12 +128,15 @@ def fill_staff(cantus : List[int]) -> None :
     container.innerHTML = HTML
 
 
+def task_remove(t : asyncio.Task) :
+    t.exception()
+    background_tasks.discard(t)
 
 @when("click", "#midi")
 def gen_midi_handler() -> None :
     task = asyncio.create_task(generate_midi())
     background_tasks.add(task)
-    task.add_done_callback(background_tasks.discard)
+    task.add_done_callback(task_remove)
 
 async def generate_midi() -> None :
     print("Generating midi")
