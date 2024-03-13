@@ -60,6 +60,14 @@
 
       }
 
+    
+      .header-logo {
+        width : 100px;
+        height: 100px;
+        padding : 0;
+      }
+
+
     </style>
     <script type="module">
         const loading = document.getElementById('loading');
@@ -83,8 +91,9 @@
 
     <header class="container-fluid gx-0 bg-primary-subtle">
       <div class="row align-items-center m-3">
-        <img src="assets/images/cantus-icon.webp" height="100px" width="100px" class="col-1">
-        <div class="col-10 text-center">
+        <img src="assets/images/cantus-icon.jpg" height="100px" width="100px"
+          class="header-logo">
+        <div class="col-8 text-center">
           <span class="text-black fs-1 p-3 p-md-4">Cantus Fortuitus</span>
         </div>
       </div>
@@ -94,38 +103,63 @@
     <p>For all your counterpoint needs.</p>
 
     <div class="container-fluid">
+
       <div class="row m-3">
-        <div class="col-10">
-        <button id="generate">Generate</button>
-        <label  for="size-input">Cantus Size</label>
-        <input  type="number" name="size" min="8" max="16" value="10" id="size-input">
-        <label  for="span-input">Highest Note</label>
-        <select  id="span-input" name="select-input">
-          <option value="Random">Random</option>
-          <option value="5">5</option>
-          <option value="6">6</option>
-          <option value="8">8</option>
-          <option value="10">10</option>
-        </select>
+        <div class="col-12">
+
+          <button type="button" class="btn btn-primary" id="generate">Generate</button>
+
+          <div class="d-inline-block">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <label class="input-group-text" for="size-input">Cantus Size</label>
+              </div>
+              <input  type="number" name="size" min="8" max="16" value="10" id="size-input">
+            </div>
+          </div>
+
+          <div class="d-inline-block">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <label class="input-group-text"for="span-input">Highest Note</label>
+              </div>
+              <select  id="span-input" class="custom-select" name="select-input">
+                <option value="Random">Random</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="8">8</option>
+                <option value="10">10</option>
+              </select>
+            </div>
+          </div>
+
+        </div> 
       </div>
 
-      </div>
+
       <div class="row">
         <form class="col-3">
-          <input type="radio" id="method-good" name="method" value="good" checked>
-          <label for="good">Until All Checks Pass</label><br>
-          <input type="radio" id="method-once" name="method" value="once">
-          <label for="once">Try Once</label><br>
+          <div class="custom-control custom-radio">
+            <input type="radio" id="method-good" name="method" class="custom-control-input" value="good" checked>
+            <label for="method-good" class="custom-control-label" >Until All Checks Pass</label><br>
+          </div>
+          <div class="custom-control custom-radio">
+            <input type="radio" id="method-once" name="method" class="custom-control-input" value="once">
+            <label for="method-once" class="custom-control-label" >Try Once</label><br>
+          </div>
         </form>
 
       </div>
 
     
-    <div class="row mt-3 border-top"></div>
-      <div class="col-3 mt-3">
-        <button id="midi">Generate Midi</button>
+      <div class="row mt-3 border-top">
+        <div class="col-3 mt-3">
+          <button type="button" class="btn btn-primary" id="midi">Generate Midi</button>
+        </div>
       </div>
+  
     </div>
+
 
 
     <div id="output" style="font-size: 2em;">[]</div>
@@ -140,6 +174,7 @@
       </div>
       <div id="spacer-line" class="spacer-line"></div>
     </div>
+    
     <div class="container-fluid my-3 border-top border-bottom">
       <div class="row">
         <div id="checks" class="col-12 col-md-5"></div>
