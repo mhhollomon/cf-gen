@@ -1,7 +1,9 @@
 //import { useState } from 'react'
-import logo from '../assets/cantus-icon.jpg'
+import logo from '@/assets/cantus-icon.jpg'
 
-function App() {
+import CantusGenerator from '@/components/CantusGenerator.tsx';
+
+export default function App() {
 
   return (
     <>
@@ -17,8 +19,9 @@ function App() {
 
     <h3>Randomly Generated Cantus Firmus</h3>
     <p>For all your counterpoint needs.</p>
+
+    <CantusGenerator />
     </>
   )
 }
 
-export default App
