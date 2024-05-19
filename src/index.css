@@ -11,3 +11,40 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.staff-line, .ledger-line {
+  height: 20px;
+}
+
+.spacer-line {
+  height : 20px;
+}
+.note-box {
+  position : relative;
+  height : 20px;
+}
+
+.noto-music-regular {
+  font-family: "Noto Music", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+  font-size: 70px;
+}
+
+.clef {
+  font-family: "Noto Music", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+  font-size: 60px;
+
+  position : relative; 
+  bottom:80px;       
+}
+
+
+.header-logo {
+  width : 100px;
+  height: 100px;
+  padding : 0;
+}
+
