@@ -1,3 +1,5 @@
+import { For } from "solid-js";
+
 const  y_offsets : number[] = [-50, 20, 70, 120, 170, 220, 270, 320, 370, 420];
 
 interface noteDisplayData {
@@ -12,13 +14,11 @@ interface noteDisplayData {
   x_offset : number;
 }
 
-export default function ClefDisplay(
-    {cantus} : { cantus : number[] }
-) {
+export default function ClefDisplay(props : any ) {
 
     // use a percentage of the width of our parent
     // the complication is to round to single decimal place
-    let width : number = (Math.round(1000.0/(cantus.length+1))) / 10.0;
+    let width : number = (Math.round(1000.0/(props.cantus().length+1))) / 10.0;
     
     // -24 is padding added by bootstrap
     //let pixel_width : number = Math.round((container.offsetWidth-24) * ( width / 100.0))
@@ -26,10 +26,10 @@ export default function ClefDisplay(
 
     let current_pos : number = -1;
 
-    let noteData : noteDisplayData[] = cantus.map((note) => {
+    let noteData : noteDisplayData[] = props.cantus().map((note : number) => {
 
       current_pos += 1;
-      let last_note : boolean = current_pos == cantus.length - 1;
+      let last_note : boolean = current_pos == props.cantus().length - 1;
 
       let symbol : string =  String.fromCodePoint(last_note ? 0x1D15C : 0x1D15D);
 
@@ -58,7 +58,7 @@ export default function ClefDisplay(
 
     return (
     <>
-    <div id="output" style={{"font-size": "2em"}}>[ {cantus.join(", ")}]</div>
+    <div id="output" style={{"font-size": "2em"}}>[ {props.cantus().join(", ")}]</div>
     <div id="music-staff" class="container-fluid">
       <div id="staff-line-5" class="staff-line border-bottom border-dark border-3"></div>
       <div id="staff-line-4" class="staff-line border-bottom border-dark border-3"></div>
@@ -69,17 +69,16 @@ export default function ClefDisplay(
         <span class="clef">&#x1d11e;</span>
       </div>
       <div id="spacer-line" class="spacer-line">
-        {noteData.map((n) => {
-          return <div 
+        <For each={noteData}>{(n) => 
+          <div 
             class={`d-inline-block note-box ${n.klass} border-3 border-dark`}
             style={{ width:"50px", left:`${n.left}%`
             }}>
               <div class="position-absolute" style={{bottom:`${n.y_offset}%`, left:`${n.x_offset}%`}}>
             <span class="noto-music-regular">{n.symbol}</span></div>
-        </div>
-
-
-        })}
+          </div>
+        }
+        </For>
       </div>
     </div>
 

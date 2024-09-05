@@ -1,15 +1,15 @@
 
-import GeneratorOptions from "./GeneratorOptions";
-import ClefDisplay from "./ClefDisplay";
+import GeneratorOptions from "./GeneratorOptions.tsx";
+import ClefDisplay from "./ClefDisplay.tsx";
 
 import {createSignal} from 'solid-js';
 
-import ChecksDisplay from "./ChecksDisplay";
+import ChecksDisplay from "./ChecksDisplay.tsx";
 
 import { CheckStatusList, startingCheckStatus } from '../dataclasses/CheckStatus.tsx'
 
 
-export default function CantusGenerator() {
+export default function CantusGeneratorUI() {
 
    let [checks ] = createSignal<CheckStatusList>(startingCheckStatus());
    let [cantus ] = createSignal<number[]>([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1]);
@@ -25,7 +25,7 @@ export default function CantusGenerator() {
         <>
         <div class="container-fluid">
             <GeneratorOptions generate={generate_cantus}/>
-            <ClefDisplay cantus={cantus()}/>
+            <ClefDisplay cantus={cantus}/>
             <ChecksDisplay checks={checks}/>
         </div>
         </>

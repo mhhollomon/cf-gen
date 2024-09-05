@@ -1,6 +1,6 @@
 import logo from '@/assets/cantus-icon.jpg'
 
-import CantusGenerator from './components/CantusGenerator';
+import CantusGeneratorUI from './components/CantusGeneratorUI';
 
 export default function App() {
 
@@ -19,7 +19,7 @@ export default function App() {
     <h3>Randomly Generated Cantus Firmus</h3>
     <p>For all your counterpoint needs.</p>
 
-    <CantusGenerator />
+    <CantusGeneratorUI />
     </>
   )
 }
