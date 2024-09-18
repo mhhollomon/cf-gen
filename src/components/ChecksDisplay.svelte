@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { type CheckStatusList, type CheckStatus } from './dataclasses/CheckStatus'
+    import { type CheckStatusList, type CheckStatus } from '../lib/dataclasses/CheckStatus'
 
     export let checks : CheckStatusList;
 

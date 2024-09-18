@@ -16,18 +16,18 @@
         x_offset : number;
     }
 
-    // use a percentage of the width of our parent
-    // the complication is to round to single decimal place
-    $: width = (Math.round(1000.0/(cantus.length+1))) / 10.0;
-    
-    // -24 is padding added by bootstrap
-    //let pixel_width : number = Math.round((container.offsetWidth-24) * ( width / 100.0))
-    $: ledger_box_width = width / 2.0;
-
     let noteData : noteDisplayData[];
 
     $: {
       
+    // use a percentage of the width of our parent
+    // the complication is to round to single decimal place
+    let width = (Math.round(1000.0/(cantus.length+1))) / 10.0;
+    
+    // -24 is padding added by bootstrap
+    //let pixel_width : number = Math.round((container.offsetWidth-24) * ( width / 100.0))
+    let ledger_box_width = width / 2.0;
+
       let current_pos : number = -1;
 
       noteData  = cantus.map((note : number) => {
@@ -76,7 +76,7 @@
   <div id="spacer-line" class="spacer-line">
     {#each noteData as n}
       <div 
-        class={`d-inline-block note-box ${n.klass} border-3 border-dark`}
+        class="d-inline-block note-box {n.klass} border-3 border-dark"
         style="width:50px; left:{n.left}%"
         >
         <div class="position-absolute" style="bottom:{n.y_offset}%; left:{n.x_offset}%">

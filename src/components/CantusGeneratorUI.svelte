@@ -1,6 +1,6 @@
 <script lang="ts">
-    import { cantus } from "./stores";
-    import { startingCheckStatus } from './dataclasses/CheckStatus';
+    import { cantus } from "../lib/stores";
+    import { startingCheckStatus } from '../lib/dataclasses/CheckStatus';
 
     import GeneratorOptions from "./GeneratorOptions.svelte";
     import ClefDisplay from "./ClefDisplay.svelte";

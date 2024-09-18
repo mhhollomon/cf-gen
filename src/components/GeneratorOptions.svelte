@@ -4,7 +4,7 @@
 
     import { Form, FormGroup, Button, Input } from '@sveltestrap/sveltestrap';
 
-    import {cantusSize, highest} from './stores';
+    import {cantusSize, highest} from '../lib/stores';
 
     let radioGroup : string = "good";
 
@@ -22,7 +22,7 @@
 </script>
 
 
-<div class="row m-3">
+<div class="row">
     <div class="col-12">
 
         <Button type="button" class="btn btn-primary" id="generate"
