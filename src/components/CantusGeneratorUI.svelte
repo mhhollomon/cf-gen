@@ -119,7 +119,7 @@
         startIn : "downloads",
         suggestedName : "cantus_firmus.mid",
         types : [
-            { accept : { content_type : [".mid", ".midi"]}}
+            { accept : { "audio/midi" : [".mid", ".midi"]}}
         ]
     };
 
