@@ -109,7 +109,7 @@
    }
 
 
-   async function do_midi(fileName : string) {
+   async function do_midi(_ : any) {
 
     const writer = generate_midi_notes($cantus, TonicNote);
 
@@ -119,16 +119,18 @@
         startIn : "downloads",
         suggestedName : "cantus_firmus.mid",
         types : [
-            { accept : { "audio/midi" : [".mid", ".midi"]}}
+            { accept : { 'audio/midi' : [".mid", ".midi"]}}
         ]
     };
 
-    let fileHandle = await window.showSaveFilePicker(opts);
+    const fileHandle : FileSystemFileHandle = await window.showSaveFilePicker(opts);
 
-    saveAs(blob, "CantusFirmus.mid");
+    const fileWriter = await fileHandle.createWritable();
+
+    await fileWriter.write(blob);
+    await fileWriter.close();
 
     closeMidiModal();
-    
 
    }
 
