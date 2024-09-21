@@ -4,5 +4,19 @@ export const cantusSize = writable(10);
 
 export const highest = writable("Random");
 
-export const cantus = writable<number[]>([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1]);
+export const cantus = writable<number[]>([]);
 
+export interface ModalInfo {
+    open : boolean;
+    message : string;
+}
+
+export const errorModal = writable<ModalInfo>({open : false, message : ''});
+
+export function openErrorModal(msg : string) {
+    errorModal.set({open : true, message : msg });
+}
+
+export function closeErrorModal() {
+    errorModal.set({open : false, message : '' });
+}

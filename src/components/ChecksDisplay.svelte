@@ -6,6 +6,8 @@
     type statusDisplay = {
         icon : string;
         background : string;
+        name : string;
+        message : string;
     }
 
     function checkDisplay(check : CheckStatus) : statusDisplay {
@@ -14,18 +16,25 @@
 
         switch(check.status){
             case 'YES' : 
+                background = '#33FF33';
                 icon = 'check_box'; 
                 break;
             case 'NO'  : 
-                icon = 'disabled_by_default';
                 background = '#FF3333';
+                icon = 'disabled_by_default';
                 break;
             default    : 
+                background = 'inherit';
                 icon = 'indeterminate_check_box'; 
                 break;
         }
 
-        return {icon : icon, background : background };
+        return {icon : icon, background : background, 
+            name : check.name, message : check.message };
+    }
+
+    function displayData(checks : CheckStatusList) : statusDisplay[] {
+        return checks.flatMap((c) => checkDisplay(c));
     }
 
 </script>
@@ -40,15 +49,14 @@
                 <th>Message</th>
             </tr></thead>
             <tbody>
-                {#each checks as c }
+                {#each displayData(checks) as c }
                 <tr id={c.name} >
-                    <td><span class="material-symbols-outlined">
-                        {checkDisplay(c).icon}
+                    <td style="background-color : {c.background};"><span class="material-symbols-outlined">
+                        {c.icon}
                         </span></td>
                     <td>{c.name}</td>
                     <td>{c.message}</td>
                 </tr>
-                    
                 {/each}
             </tbody>
         </table>

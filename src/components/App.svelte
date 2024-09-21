@@ -1,6 +1,17 @@
 <script lang="ts">
   import logo from '../assets/cantus-icon.jpg';
   import CantusGeneratorUi from './CantusGeneratorUI.svelte';
+
+  import { 
+    Button,
+    Modal,
+    ModalBody,
+    ModalFooter,
+    ModalHeader
+  } from '@sveltestrap/sveltestrap';
+
+  import { errorModal, closeErrorModal } from '../lib/stores';
+
 </script>
 
 <header class="container-fluid gx-1 bg-primary-subtle">
@@ -18,3 +29,10 @@
   <CantusGeneratorUi />
 </main>
 
+<Modal isOpen={$errorModal.open}>
+  <ModalHeader>ERROR</ModalHeader>
+  <ModalBody>{$errorModal.message}</ModalBody>
+  <ModalFooter>
+    <Button color="secondary" on:click={closeErrorModal}>Cancel</Button>  
+  </ModalFooter>
+</Modal>
