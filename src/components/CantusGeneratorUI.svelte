@@ -12,8 +12,6 @@
     Input
   } from '@sveltestrap/sveltestrap';
 
-    import { saveAs } from "file-saver";
-
 
     import { openErrorModal } from "../lib/stores";
 
