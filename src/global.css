@@ -1,51 +1,44 @@
-
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+    /* THEME VARS */
+    --border-color : black;
+    --color-primary: #2d471e;
+    --fg-color : black;
+    --bg-color : white;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+    font-family: ui-rounded, 'Hiragino Maru Gothic ProN', Quicksand, Comfortaa, Manjari, 'Arial Rounded MT', 'Arial Rounded MT Bold', Calibri, source-sans-pro, sans-serif;
+    line-height: 1.5;
+    --brand-color :#2d471e;
+    --accent-color : var(--brand-color);
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    --border-radius : .5rem;
+
+    font-size : 120%;
+
 }
 
-.staff-line, .ledger-line {
-  height: 20px;
-}
-
-.spacer-line {
-  height : 20px;
-}
-.note-box {
-  position : relative;
-  height : 20px;
-}
-
-.noto-music-regular {
-  font-family: "Noto Music", sans-serif;
-  font-weight: 300;
-  font-style: normal;
-  font-size: 70px;
-}
-
-.clef {
-  font-family: "Noto Music", sans-serif;
-  font-weight: 300;
-  font-style: normal;
-  font-size: 60px;
-
-  position : relative; 
-  bottom: 80px;       
+[data-theme="dark"] {
+    --border-color : #dee2e6;
+    --fg-color : white;
+    --bg-color : #212529;
+    --accent-color : #83e64a;
 }
 
 
-.header-logo {
-  width : 100px;
-  height: 100px;
-  padding : 0;
+body {
+    background-color : var(--bg-color);
+    color : var(--fg-color);
+
+    --border-std : 1px solid var(--border-color);
+}
+
+input, select, button, optgroup, textarea {
+    height : 2rem;
+    border-radius: .5rem;
+    border: var(--border-std);
+    margin : 0 .25rem;
+    color : var(--fg-color);
+    background-color : var(--bg-color);
+    accent-color: var(--accent-color);
+    background-color: var(--bg-color);
+    color: var(--fg-color);
 }
