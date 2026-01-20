@@ -14,6 +14,10 @@
 
     font-size : 120%;
 
+    --font-size-h1 : calc(1.375rem + 1.5vw);
+    --font-size-h2 : calc(1.325rem + .9vw);
+    --font-size-h3 : calc(1.3rem + .6vw);
+
 }
 
 [data-theme="dark"] {

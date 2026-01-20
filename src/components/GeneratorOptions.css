@@ -1,0 +1,12 @@
+.generator-options {
+    border : 3px solid green;
+}
+
+.generator-options__checks-method-radio {
+    align-items: center;
+    label, input[type="radio"] {
+        display : inline;
+        height : 1.5rem;
+        vertical-align: top;
+    }
+}

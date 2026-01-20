@@ -3,7 +3,7 @@
     import { type CheckStatusList } from '../lib/dataclasses/CheckStatus';
     import CantusGenerator from '../lib/CantusGenerator';
 
-    import { 
+    import {
     Button,
     Modal,
     ModalBody,
@@ -148,6 +148,6 @@
     </ModalBody>
     <ModalFooter>
         <Button color="primary" on:click={do_midi}>Generate</Button>
-        <Button color="secondary" on:click={closeMidiModal}>Cancel</Button>  
+        <Button color="secondary" on:click={closeMidiModal}>Cancel</Button>
     </ModalFooter>
   </Modal>
